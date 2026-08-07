@@ -1,9 +1,11 @@
 'use server'
 
 import { redirect } from "next/navigation";
-import { addNote } from "../services/notes";
+import { addNote} from "../services/notes";
 import { revalidatePath } from "next/cache";
 import { addBlog } from "../blogs/blogs";
+import { toggleNoteImportance } from "../services/notes";
+
 
 
 export async function createNote(formData: FormData) {
@@ -23,4 +25,12 @@ export async function createBlog(formData: FormData) {
     addBlog(title, author, url);
     revalidatePath("/blogs")
     redirect("/blogs")
+}
+
+export async function toggleImportance(formData: FormData) {
+    const id = Number(formData.get("id"))
+    toggleNoteImportance(id)
+    revalidatePath(`/notes/${id}`)
+    revalidatePath("/notes")
+    redirect("/notes")
 }

@@ -1,6 +1,6 @@
 
 
-type Note = {
+export type Note = {
     id: number;
     content: string;
     date: string;
@@ -8,7 +8,7 @@ type Note = {
 }
 
 
-const notes: Note[] = [
+export const notes: Note[] = [
     {
         id: 1,
         content: "HTML is easy",
@@ -43,3 +43,16 @@ export const addNote = (content: string, important: boolean) => {
         important
     })
 }
+
+export const getNoteById = (id: number) => {
+    return notes.find(note => note.id === id)
+}
+
+export const toggleNoteImportance = (id: number) => {
+    const note = notes.find(note => note.id === id);
+    if (note) {
+        note.important = !note.important
+    }
+}
+
+

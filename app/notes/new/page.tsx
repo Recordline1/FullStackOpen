@@ -15,7 +15,7 @@ const NewNote = () => {
                         <input
                             className="border-b border-b-gray-400 p-2 "
                             placeholder="content..."
-                             autoFocus
+                            autoFocus
                             type="text" name="content" required />
                     </label>
                 </div>
