@@ -1,17 +1,22 @@
-import {getBlogs } from "./blogs"
+import { getBlogs } from "./blogs"
+import Link from "next/link";
 
 const Blogs = () => {
     const blogs = getBlogs()
     return (
-        <div>
-            <h1>Blogs</h1>
-            <ul>
-                {blogs.map((blog) => <li key={blog.id}>
-                    <h2>{blog.title}</h2>
-                    <p>{blog.author}</p>
-                    <p>{blog.url}</p>
-                    <p>{blog.likes}</p>
-                </li>)}
+        <div className="flex flex-col gap-4 container mx-auto p-4">
+            <h1 className="text-2xl font-semibold">Blogs</h1>
+            <ul className="mt-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
+                {blogs.map((blog) =>
+                    <li
+                        className="border border-gray-300 p-4 rounded-md shadow-md flex flex-col gap-2"
+                        key={blog.id}>
+                        <h2 className="text-xl font-semibold">{blog.title}</h2>
+                        <p className="text-gray-600">{blog.author}</p>
+                        <p className="text-blue-500 underline"><a href={blog.url} target="_blank" rel="noopener noreferrer">Read more</a></p>
+                        <p className="text-sm text-gray-500">{blog.likes} 💕 likes</p>
+                        <Link href={`/blogs/${blog.id}`} className="text-white bg-amber-500 p-2 rounded-md hover:bg-amber-600 flex justify-center">View Blog</Link>
+                    </li>)}
             </ul>
         </div>
     )

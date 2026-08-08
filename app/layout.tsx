@@ -29,7 +29,7 @@ export default function RootLayout({
       className={`${geistSans.variable} ${geistMono.variable} h-full antialiased`}
     >
       <body className="min-h-full flex flex-col">
-        <nav>
+        <nav className="flex gap-4 p-4 bg-gray-100 border-b border-gray-300 shadow-sm sticky top-0 z-10 backdrop-blur-md bg-opacity-80 text-lg">
           <Link href="/">home</Link>
           {" | "}
           <Link href="/notes">notes</Link>
