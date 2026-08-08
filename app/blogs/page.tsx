@@ -1,15 +1,31 @@
 import { getBlogs } from "./blogs"
 import Link from "next/link";
+import { BlogFilter } from "./BlogFilter";
 
-const Blogs = () => {
+const Blogs = async ({ searchParams }: { searchParams: Promise<{ filter?: string }> }) => {
+    const { filter } = await searchParams;
     const blogs = getBlogs()
-  
 
-    const sortedBlogs = blogs.toSorted((a,b)=> b.likes - a.likes);
+    const searchQuery = filter?.toLowerCase() || "";
+    const filteredBlogs = searchQuery ? blogs.filter(blog => blog.title.toLowerCase().includes(searchQuery)) : blogs;
+
+    const sortedBlogs = filteredBlogs.toSorted((a, b) => b.likes - a.likes);
+
+    if(!sortedBlogs.length) {
+        return (
+            <div className="flex flex-col gap-4 container mx-auto p-4">
+                <h1 className="text-2xl font-semibold">Blogs</h1>
+                <BlogFilter />
+                <p className="mt-4">No blogs found</p>
+                <   Link href="/blogs" className="text-white bg-amber-500 p-2 rounded-md hover:bg-amber-600 flex justify-center w-fit">🔙  to blogs</Link>
+            </div>
+        )
+    }
 
     return (
         <div className="flex flex-col gap-4 container mx-auto p-4">
             <h1 className="text-2xl font-semibold">Blogs</h1>
+            <BlogFilter />
             <ul className="mt-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
                 {sortedBlogs.map((blog) =>
                     <li

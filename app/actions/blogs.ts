@@ -23,3 +23,15 @@ export async function likeBlogAction(formData: FormData) {
    
 }
 
+
+export async function searchBlog(formData: FormData) {
+    const filter = formData.get("filter") as string;
+    const params = new URLSearchParams();
+
+    if(filter && filter.trim() !== "") {
+        params.set("filter", filter);
+    }
+   
+    redirect(`/blogs?${params.toString()}` ? `/blogs?${params.toString()}` : "/blogs");
+}
+

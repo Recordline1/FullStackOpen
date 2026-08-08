@@ -1,20 +1,20 @@
 const blogs = [{
     id: 1,
-    title: "First blog",
+    title: "first blog",
     author: "John Doe",
     url: "https://example.com/first-blog",
     likes: 10,
 },
 {
     id: 2,
-    title: "Second blog",
+    title: "second blog",
     author: "Jane Doe",
     url: "https://example.com/second-blog",
     likes: 5,
 },
 {
     id: 3,
-    title: "Third blog",
+    title: "third blog",
     author: "John Doe",
     url: "https://example.com/third-blog",
     likes: 15,
