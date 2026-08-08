@@ -3,11 +3,15 @@ import Link from "next/link";
 
 const Blogs = () => {
     const blogs = getBlogs()
+  
+
+    const sortedBlogs = blogs.toSorted((a,b)=> b.likes - a.likes);
+
     return (
         <div className="flex flex-col gap-4 container mx-auto p-4">
             <h1 className="text-2xl font-semibold">Blogs</h1>
             <ul className="mt-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {blogs.map((blog) =>
+                {sortedBlogs.map((blog) =>
                     <li
                         className="border border-gray-300 p-4 rounded-md shadow-md flex flex-col gap-2"
                         key={blog.id}>
