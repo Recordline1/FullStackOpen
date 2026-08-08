@@ -1,5 +1,6 @@
 import {notFound} from "next/navigation";
 import { getBlogById } from "@app/blogs/blogs";
+import { likeBlogAction } from "@/app/actions/blogs";
 
 
 
@@ -18,7 +19,15 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
             <h2 className="text-xl font-semibold">{blog.title}</h2>
             <p className="text-gray-600">{blog.author}</p>
             <p className="text-blue-500 underline"><a href={blog.url} target="_blank" rel="noopener noreferrer">Read more</a></p>
-            <p className="text-sm text-gray-500">{blog.likes} 💕 likes</p>
+            <div className="flex gap-2 items-center">
+                <p className="text-sm font-bold text-gray-500">{blog.likes}  likes</p>
+                <form action={likeBlogAction}>
+                    <input type="hidden" name="id" value={blog.id} />
+                    <button type="submit" className="text-white bg-amber-500 p-2 rounded-md hover:bg-amber-600 cursor-pointer ">
+                       <span>💕</span> Like Blog
+                    </button>
+                </form>
+            </div>
         </div>
     )
 }
