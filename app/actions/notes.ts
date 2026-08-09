@@ -11,14 +11,14 @@ export async function createNote(formData: FormData) {
     const content = formData.get("content") as string
     const important = formData.get("important") === "on"
 
-    addNote(content, important)
+   await addNote(content, important)
     revalidatePath("/notes")
     redirect("/notes")
 }
 
 export async function toggleImportance(formData: FormData) {
     const id = Number(formData.get("id"))
-    toggleNoteImportance(id)
+    await toggleNoteImportance(id)
     revalidatePath(`/notes/${id}`)
     revalidatePath("/notes")
     redirect("/notes")

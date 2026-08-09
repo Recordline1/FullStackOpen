@@ -42,6 +42,7 @@ export const getBlogById = (id: number) => {
 }
 
 export const likeBlog = (id: number) => {
+    
     const blog = blogs.find(blog => blog.id === id)
     if (blog) {
         blog.likes++
