@@ -7,6 +7,7 @@ const NewBlog = () => {
                 action={createBlog}
                 className="max-w-sm flex flex-col gap-4 mt-4 border border-grey-100 p-4 rounded-md shadow-md"
             >
+                <input type="hidden" name="userId" value="1" />
                 <div>
                     <label className="flex flex-col gap-2">
                         Title

@@ -1,17 +1,15 @@
-import { getBlogs } from "./blogs"
+import { getBlogs } from "../services/blogs"
 import Link from "next/link";
 import { BlogFilter } from "./BlogFilter";
 
 const Blogs = async ({ searchParams }: { searchParams: Promise<{ filter?: string }> }) => {
     const { filter } = await searchParams;
-    const blogs = getBlogs()
-
     const searchQuery = filter?.toLowerCase() || "";
-    const filteredBlogs = searchQuery ? blogs.filter(blog => blog.title.toLowerCase().includes(searchQuery)) : blogs;
+    const blogs = await getBlogs(searchQuery)
 
-    const sortedBlogs = filteredBlogs.toSorted((a, b) => b.likes - a.likes);
 
-    if(!sortedBlogs.length) {
+
+    if(!blogs || blogs.length === 0) {
         return (
             <div className="flex flex-col gap-4 container mx-auto p-4">
                 <h1 className="text-2xl font-semibold">Blogs</h1>
@@ -27,7 +25,7 @@ const Blogs = async ({ searchParams }: { searchParams: Promise<{ filter?: string
             <h1 className="text-2xl font-semibold">Blogs</h1>
             <BlogFilter />
             <ul className="mt-4 grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-4">
-                {sortedBlogs.map((blog) =>
+                {blogs.map((blog) =>
                     <li
                         className="border border-gray-300 p-4 rounded-md shadow-md flex flex-col gap-2"
                         key={blog.id}>
