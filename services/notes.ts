@@ -1,6 +1,8 @@
 import { eq, sql } from "drizzle-orm"
 import { db } from "@/db"
 import { notes } from "@/db/schema"
+import { getCurrentUser } from "./session"
+
 
 
 export const getNotes = async ( important?:boolean) => {
@@ -19,9 +21,12 @@ export const getNoteById = async (id: number) => {
 }
 
 export const addNote = async (content: string, important: boolean) => {
-  const user = await db.query.users.findFirst({
-    orderBy: sql`RANDOM()`,
-  })
+   
+  const user = await getCurrentUser()
+  if (!user) {
+    throw new Error("Cannot add a note without a logged-in user")
+  }
+  
 
   await db.insert(notes).values({ content, important, userId: user.id })
 }
@@ -58,7 +63,7 @@ export const toggleNoteImportance = async (id: number) => {
 //     }
 // ]
 
-let nextId = 4
+// let nextId = 4
 
 
 

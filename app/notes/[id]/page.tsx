@@ -1,6 +1,6 @@
 import { notFound } from "next/navigation"
-import { getNoteById } from "../../services/notes"
-import { toggleImportance } from "../../actions/notes"
+import { getNoteById } from "../../../services/notes"
+import { toggleImportance } from "../../../actions/notes"
 
 const NotePage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params

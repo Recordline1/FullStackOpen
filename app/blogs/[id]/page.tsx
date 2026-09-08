@@ -1,6 +1,6 @@
 import {notFound} from "next/navigation";
-import { getBlogById } from "@/app/services/blogs";
-import { likeBlogAction } from "@/app/actions/blogs";
+import { getBlogById } from "@/services/blogs";
+import { likeBlogAction } from "@/actions/blogs";
 
 
 

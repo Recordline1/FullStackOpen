@@ -1,11 +1,10 @@
 'use client';
 
-import { Note } from "../services/notes";
 import { useState } from "react";
 import Link from "next/link";
 
 
-export const NoteList = ({ notes }: { notes: Note[] }) => {
+export const NoteList = ({ notes }: { notes: { id: number; content: string; important: boolean }[] }) => {
   const [showAll, setShowAll] = useState(false);
 
   const notesToShow = showAll ? notes : notes.filter(note => note.important);

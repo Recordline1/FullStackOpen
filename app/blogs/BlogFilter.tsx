@@ -1,4 +1,4 @@
-import {searchBlog} from "../actions/blogs";
+import {searchBlog} from "../../actions/blogs";
 import { Search } from "lucide-react";
 
 export const BlogFilter = () => {

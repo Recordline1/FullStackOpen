@@ -1,6 +1,7 @@
 import { db } from "@/db"
 import { blogs } from "@/db/schema"
-import { ilike, desc, eq } from "drizzle-orm";
+import { ilike, desc, eq, sql } from "drizzle-orm";
+import { getCurrentUser } from "./session";
 
 
 
@@ -16,7 +17,12 @@ export const getUsers = async () => {
 }
 
 export const addBlog = async (title: string, author: string, url: string) => {
-    await db.insert(blogs).values({ title, author, url })
+
+    const user = await getCurrentUser()
+    if (!user) {
+        throw new Error("Cannot add a blog without a logged-in user")
+    }
+    await db.insert(blogs).values({ title, author, url, userId: user.id })
 }
 
 export const getBlogById = async (id: number) => {

@@ -1,4 +1,4 @@
-import { createNote } from "../../actions/notes";
+import { createNote } from "../../../actions/notes";
 
 
 const NewNote = () => {

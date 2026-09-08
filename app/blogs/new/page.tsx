@@ -1,4 +1,4 @@
-import { createBlog } from "../../actions/blogs";
+import { createBlog } from "../../../actions/blogs";
 const NewBlog = () => {
     return (
         <div className="flex flex-col gap-4 container mx-auto p-4">

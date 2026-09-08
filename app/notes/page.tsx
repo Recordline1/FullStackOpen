@@ -1,4 +1,4 @@
-import { getNotes } from "@/app/services/notes";
+import { getNotes } from "@/services/notes";
 import Link from "next/link";
 const Notes = async ({ searchParams }: { searchParams: Promise<{ important?: string }> }) => {
     const { important } = await searchParams;
