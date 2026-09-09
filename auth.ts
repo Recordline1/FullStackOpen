@@ -5,7 +5,7 @@ import bcrypt from "bcryptjs"
 import { db } from "@/db"
 import { users } from "@/db/schema"
 
-export const { handlers, auth, signIn, signOut } = NextAuth({
+export const { handlers:{ GET, POST }, auth, signIn, signOut } = NextAuth({
   providers: [
     Credentials({
       credentials: {

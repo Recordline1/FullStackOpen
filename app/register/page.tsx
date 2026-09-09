@@ -1,4 +1,3 @@
-import Link from "next/link"
 import { registerUser } from "@/actions/users"
 
 export default function RegisterPage() {
