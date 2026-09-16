@@ -1,7 +1,9 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
-import { Header } from "@/components/Header"
-import AuthSessionProvider from "@/components/SessionProvider"
+import { Header } from "@/components/header/Header";
+import AuthSessionProvider from "@/components/SessionProvider";
+import { NotificationProvider } from "@/components/NotificationContext";
+import Notification from "@/components/Notification";
 import "./globals.css";
 
 const geistSans = Geist({
@@ -31,8 +33,11 @@ export default function RootLayout({
     >
       <body className="min-h-full flex flex-col">
         <AuthSessionProvider>
-          <Header />
-          {children}
+          <NotificationProvider>
+            <Notification />
+            <Header />
+            {children}
+          </NotificationProvider>
         </AuthSessionProvider>
       </body>
     </html>

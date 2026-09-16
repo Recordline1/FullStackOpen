@@ -12,13 +12,13 @@ export const NoteList = ({ notes }: { notes: { id: number; content: string; impo
   return (
     <div>
       <button
-       className="bg-amber-500 text-white p-2 rounded-md hover:bg-amber-600 mb-4"
+       className="bg-amber-500 text-white rounded-md hover:bg-amber-600 mb-4"
        onClick={() => setShowAll(!showAll)}>
         {showAll ? "Show only important" : "Show all"}
       </button>
       {notesToShow.map(note => (
-        <div key={note.id} className="border border-gray-300 p-4 rounded-md mb-4 shadow-md">
-          <p> <Link href={`/notes/${note.id}`}>{note.content}</Link></p>
+        <div key={note.id} className="border border-mauve-200 p-4 rounded-md shadow-md">
+          <Link className="  text-amber-500 hover:text-amber-600" href={`/notes/${note.id}`}>{note.content}</Link>
           <p
             className={`${
               note.important ? "text-amber-500" : "text-gray-500"

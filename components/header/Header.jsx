@@ -1,8 +1,9 @@
 "use client";
 
 import Link from "next/link";
-import { HeaderTimer } from "./HeaderTimer";
+import { HeaderTimer } from "../HeaderTimer";
 import { useSession, signOut } from "next-auth/react"
+import { NavList } from "./NavList";
 
 export function Header() {
     const { data: session } = useSession();
@@ -24,19 +25,7 @@ export function Header() {
                     <Link href="/login">login</Link>
                 )}
             </div>
-            <nav className="flex gap-4 text-blue-500">
-                <Link href="/">home</Link>
-                {" | "}
-                <Link href="/notes">notes</Link>
-                {" | "}
-                <Link href="/notes/new">new notes</Link>
-                {" | "}
-                <Link href="/blogs">blogs</Link>
-                {" | "}
-                <Link href="/blogs/new">new blog</Link>
-                {" | "}
-                <Link href="/users">users</Link>
-            </nav>
+            <NavList />
         </header>
     )
 }
