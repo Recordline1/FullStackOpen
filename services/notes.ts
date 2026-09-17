@@ -14,6 +14,8 @@ export const getNotes = async ( important?:boolean) => {
     return db.query.notes.findMany()
 }
 
+export const importantNotes = await db.select().from(notes).where(eq(notes.important, true))
+
 export const getNoteById = async (id: number) => {
     return db.query.notes.findFirst({
         where: eq(notes.id, id),

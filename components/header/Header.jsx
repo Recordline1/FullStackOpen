@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { HeaderTimer } from "../HeaderTimer";
+import { HeaderTimer } from "./HeaderTimer";
 import { useSession, signOut } from "next-auth/react"
 import { NavList } from "./NavList";
 
@@ -15,12 +15,11 @@ export function Header() {
                 <HeaderTimer />
 
                 {session ? (
-                    <>
-                        <Link className="text-amber-500 hover:text-amber-600" href="/notes/new">create new</Link>
-                        {" | "}
-                        <em>{session.user?.name} logged in</em>{" "}
+                    <div className="flex gap-4 items-center">
+                        <Link className="text-amber-500 hover:text-amber-600" href="/notes/new">create new</Link>                        
+                        <em>{session.user?.name}</em>
                         <button className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600" onClick={() => signOut()}>logout</button>
-                    </>
+                    </div>
                 ) : (
                     <Link href="/login">login</Link>
                 )}
