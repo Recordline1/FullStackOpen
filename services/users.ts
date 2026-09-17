@@ -8,3 +8,9 @@ export const getUserWithNotes = async (id: number) => {
     with: { notes: true, blogs: true },
   })
 }
+
+export const getUserbyUsername = async (username: string) => {
+  return db.query.users.findFirst({
+    where: eq(users.username, username),
+  })
+}

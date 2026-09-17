@@ -1,5 +1,6 @@
 "use client"
 import Link from "next/link";
+import { ChevronDown } from 'lucide-react';
 import { usePathname } from "next/navigation";
 
 const navlist = [
@@ -14,7 +15,8 @@ const navlist = [
         children: [{ name: "newBlog", href: "/blogs/new" },]
     },
 
-    { name: "users", href: "/users" },
+    { name: "users", href: "/users" },    
+    { name: "me", href: "/me" },
 ]
 
 
@@ -28,11 +30,12 @@ const NavDropdown = ({ item }: { item: NavItemType }) => {
     return (
         <div className="relative group py-2">
             <Link
+                key={item.href}
                 href={item.href}
                 className="hover:text-cyan-300 flex items-center gap-1 focus:outline-none"
             >
                 {item.name}
-                <span className="text-xs">▼</span>
+                <ChevronDown className="h-4 w-4" />
             </Link>
 
             <div className="absolute left-0 top-full pt-2 hidden group-hover:block group-focus-within:block z-50">
