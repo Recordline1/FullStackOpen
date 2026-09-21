@@ -14,3 +14,10 @@ export const getUserbyUsername = async (username: string) => {
     where: eq(users.username, username),
   })
 }
+
+
+export const getUserByApiToken = async (token: string) => {
+  return db.query.users.findFirst({
+    where: eq(users.apiToken, token),
+  })
+}

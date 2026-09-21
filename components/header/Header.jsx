@@ -21,7 +21,7 @@ export function Header() {
                         <button className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600" onClick={() => signOut()}>logout</button>
                     </div>
                 ) : (
-                    <Link href="/login">login</Link>
+                    <Link className="bg-amber-500 text-white p-2 rounded-md hover:bg-amber-600" href="/login">login</Link>
                 )}
             </div>
             <NavList />
