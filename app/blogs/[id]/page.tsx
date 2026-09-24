@@ -1,9 +1,9 @@
-import {notFound} from "next/navigation";
+import { notFound } from "next/navigation";
+import { auth } from "@/auth";
 import { getBlogById } from "@/services/blogs";
 import { likeBlogAction } from "@/actions/blogs";
-
-
-
+import { addBlogToReadingListAction } from "@/actions/readingList";
+import { isInReadingList } from "@/services/readingList";
 
 const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     const { id } = await params;
@@ -12,6 +12,19 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     if (!blog) {
         notFound();
     }
+
+    const session = await auth();
+    console.log("Session:", session);
+
+    const userId = Number(session?.user?.id);
+    console.log("User ID:", userId);
+
+    const isOwnBlog = Number.isFinite(userId) && userId === blog.userId;
+
+    const alreadyInReadingList =
+        !isOwnBlog && Number.isFinite(userId)
+            ? await isInReadingList(userId, blog.id)
+            : false;
 
     return (
         <div className="flex flex-col gap-4 container mx-auto p-4">
@@ -28,6 +41,21 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                     </button>
                 </form>
             </div>
+
+            {!isOwnBlog && Number.isFinite(userId) && (
+                <div>
+                    {alreadyInReadingList ? (
+                        <p className="text-sm text-gray-500">Already in your reading list</p>
+                    ) : (
+                        <form action={addBlogToReadingListAction}>
+                            <input type="hidden" name="blogId" value={blog.id} />
+                            <button type="submit" className="text-white bg-cyan-600 p-2 rounded-md hover:bg-cyan-700 cursor-pointer">
+                                Add to reading list
+                            </button>
+                        </form>
+                    )}
+                </div>
+            )}
         </div>
     )
 }

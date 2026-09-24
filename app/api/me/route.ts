@@ -1,4 +1,4 @@
-
+// app/api/me/route.ts
 import { NextRequest, NextResponse } from "next/server"
 import { getUserByApiToken } from "@/services/users"
 
@@ -23,5 +23,7 @@ export const GET = async (req: NextRequest) => {
     id: user.id,
     username: user.username,
     name: user.name,
+    notes: user.notes,
+    blogs: user.blogs,
   })
 }

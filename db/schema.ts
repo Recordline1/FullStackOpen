@@ -25,9 +25,29 @@ export const users = pgTable("users", {
   apiToken: text("api_token")
 })
 
+
+export const readingList = pgTable("reading_list", {
+  id: integer("id").primaryKey().generatedAlwaysAsIdentity(),
+  userId: integer("user_id").notNull().references(() => users.id),
+  blogId: integer("blog_id").notNull().references(() => blogs.id),
+  read: boolean("read").notNull().default(false),
+})
+
 export const usersRelations = relations(users, ({ many }) => ({
   notes: many(notes),
   blogs: many(blogs),
+  readingList: many(readingList),
+}))
+
+export const readingListRelations = relations(readingList, ({ one }) => ({
+  user: one(users, {
+    fields: [readingList.userId],
+    references: [users.id],
+  }),
+  blog: one(blogs, {
+    fields: [readingList.blogId],
+    references: [blogs.id],
+  }),
 }))
 
 export const notesRelations = relations(notes, ({ one }) => ({
@@ -37,10 +57,11 @@ export const notesRelations = relations(notes, ({ one }) => ({
   }),
 }))
 
-export const blogsRelations = relations(blogs, ({ one }) => ({
+export const blogsRelations = relations(blogs, ({ one, many }) => ({
   user: one(users, {
     fields: [blogs.userId],
     references: [users.id],
   }),
+  readingList: many(readingList)
 }))
 
