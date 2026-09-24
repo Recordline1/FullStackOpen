@@ -14,10 +14,8 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
     }
 
     const session = await auth();
-    console.log("Session:", session);
 
     const userId = Number(session?.user?.id);
-    console.log("User ID:", userId);
 
     const isOwnBlog = Number.isFinite(userId) && userId === blog.userId;
 
