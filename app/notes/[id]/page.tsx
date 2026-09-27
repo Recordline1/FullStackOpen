@@ -1,6 +1,15 @@
 import { notFound } from "next/navigation"
-import { getNoteById } from "../../../services/notes"
-import { toggleImportance } from "../../../actions/notes"
+import { getNoteById } from "@/services/notes"
+import { toggleImportance } from "@/actions/notes"
+import { Metadata } from "next"
+
+export const generateMetadata = async ({ params }: { params: Promise<{ id: string }> }): Promise<Metadata> => {
+  const { id } = await params
+  const note = await getNoteById(Number(id))
+  return {
+    title: note ? note.content.slice(0, 20) : "Note not found"
+  }
+}
 
 const NotePage = async ({ params }: { params: Promise<{ id: string }> }) => {
   const { id } = await params
