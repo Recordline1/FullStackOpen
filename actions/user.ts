@@ -1,4 +1,3 @@
-// actions/user.ts
 "use server"
 
 import { auth } from "@/auth"

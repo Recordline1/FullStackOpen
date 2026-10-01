@@ -13,7 +13,7 @@ export function HeaderTimer() {
         return () => clearInterval(interval);
     }, []);
 
-    const baseClasses = "inline-flex items-center gap-2 text-blue-500";
+    const baseClasses = "flex flex-1 items-center gap-2 text-blue-500";
     const timeClasses = "font-bold text-gray-900 tabular-nums";
 
     const hour = time?.getHours().toString().padStart(2, "0") ?? "00";

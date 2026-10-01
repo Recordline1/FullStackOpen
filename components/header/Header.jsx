@@ -11,17 +11,20 @@ export function Header() {
     return (
         <header className="flex flex-col gap-4 p-4 border-b border-gray-300">
 
-            <div className="flex  justify-between gap-4 items-center">
+            <div className="flex  gap-4 items-center">
                 <HeaderTimer />
 
                 {session ? (
                     <div className="flex gap-4 items-center">
-                        <Link className="text-amber-500 hover:text-amber-600" href="/notes/new">create new</Link>                        
+                        <Link className="text-amber-500 hover:text-amber-600" href="/notes/new">create new</Link>
                         <em>{session.user?.name}</em>
                         <button className="bg-red-500 text-white p-2 rounded-md hover:bg-red-600" onClick={() => signOut()}>logout</button>
                     </div>
                 ) : (
-                    <Link className="bg-amber-500 text-white p-2 rounded-md hover:bg-amber-600" href="/login">login</Link>
+                    <div className="flex gap-4 items-center">
+                        <Link className=" bg-cyan-500 text-white p-2 rounded-md hover:bg-cyan-600" href="/login">login</Link>
+                        <Link className="bg-amber-500 text-white p-2 rounded-md hover:bg-amber-600" href="/register">register</Link>
+                    </div>
                 )}
             </div>
             <NavList />

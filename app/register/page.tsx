@@ -13,15 +13,13 @@ export default function RegisterPage() {
       <h2 className="text-2xl font-semibold mb-4">Register</h2>
       <form action={formAction} className="flex flex-col gap-4">
         <div>
-          <label className="flex flex-col gap-1">
-            Username (must be unique)
-            <input
+          <label className="flex flex-col gap-1">Username<input
               className="border border-gray-400 p-2 rounded-md"
               type="text" name="username" required
               defaultValue={state.values?.username}
             />
           </label>
-          {state.errors?.username && <p className="text-red-500">{state.errors?.username}</p>}
+          {state.errors?.username && <p data-testid="username-error" className="text-red-500">{state.errors?.username}</p>}
         </div>
         <div>
           <label className="flex flex-col gap-1">
@@ -52,9 +50,9 @@ export default function RegisterPage() {
               type="password" name="confirmPassword" required
             />
           </label>
-          {state.errors?.confirmPassword && <p className="text-red-500">{state.errors?.confirmPassword}</p>}
+          {state.errors?.confirmPassword && <p data-testid="passwordConfirm-error" className="text-red-500">{state.errors?.confirmPassword}</p>}
         </div>
-        <button className="bg-amber-500 text-white p-2 rounded-md hover:bg-amber-600" type="submit">Register</button>
+        <button data-testid="register-button" className="bg-amber-500 text-white p-2 rounded-md hover:bg-amber-600" type="submit">Register</button>
       </form>
     </div>
   )

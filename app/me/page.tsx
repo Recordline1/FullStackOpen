@@ -28,20 +28,21 @@ const Me = async () => {
     return (
         <div className="flex flex-col gap-6 container mx-auto p-4">
             <div className="border border-gray-300 rounded-md bg-white/90 p-6 shadow-sm">
-                <h2 className="text-3xl font-semibold mb-2">My profile</h2>
-                <p className="text-gray-600">Name: {user.name}</p>
-                <p className="text-gray-600">Username: {user.username}</p>
+                <h2 data-testid="user-profile" className="text-3xl font-semibold mb-2">My profile</h2>
+                <p data-testid="user-name" className="text-gray-600">Name: {user.name}</p>
+                <p data-testid="user-username" className="text-gray-600">Username: {user.username}</p>
             </div>
 
-            <div className="border border-gray-300 rounded-md bg-white/90 p-6 shadow-sm">
+            <div data-testid="api-token-section" className="border border-gray-300 rounded-md bg-white/90 p-6 shadow-sm">
                 <h2 className="text-2xl font-semibold mb-2">API token</h2>
                 {user.apiToken ? (
-                    <p className="text-gray-600 break-all">Current token: {user.apiToken}</p>
+                    <p data-testid="token-display" className="text-gray-600 break-all">Current token: <span data-testid="api-token" className="font-semibold">{user.apiToken}</span> </p>
                 ) : (
-                    <p className="text-gray-600">Token has not been generated yet.</p>
+                    <p data-testid="no-token-message" className="text-gray-600">Token has not been generated yet.</p>
                 )}
                 <form action={generateApiToken} className="mt-4">
                     <button
+                        data-testid="generate-token-button"
                         type="submit"
                         className="px-4 py-2 bg-cyan-600 text-white rounded-md hover:bg-cyan-700 transition-colors"
                     >
@@ -50,14 +51,14 @@ const Me = async () => {
                 </form>
             </div>
 
-            <div className="border border-gray-300 rounded-md bg-white/90 p-6 shadow-sm">
+            <section data-testid="reading-list-section" className="border border-gray-300 rounded-md bg-white/90 p-6 shadow-sm">
                 <h2 className="text-2xl font-semibold mb-2">Reading list</h2>
 
-                <h3 className="text-lg font-semibold mt-4 mb-2">Unread</h3>
+                <h3 data-testid="no-unread-blogs" className="text-lg font-semibold mt-4 mb-2">Unread</h3>
                 {unread.length === 0 ? (
-                    <p className="text-gray-600">Nothing unread — nice work.</p>
+                    <p data-testid="empty-reading-list" className="text-gray-600">Nothing unread — nice work.</p>
                 ) : (
-                    <ul className="flex flex-col gap-2">
+                    <ul data-testid="unread-section" className="flex flex-col gap-2">
                         {unread.map((entry) => (
                             <li key={entry.id} className="flex items-center justify-between gap-4">
                                 <span className="text-gray-600">
@@ -66,6 +67,7 @@ const Me = async () => {
                                 <form action={markAsReadAction}>
                                     <input type="hidden" name="entryId" value={entry.id} />
                                     <button
+                                        data-testid="mark-read-button"
                                         type="submit"
                                         className="text-sm text-white bg-green-600 px-3 py-1 rounded-md hover:bg-green-700 cursor-pointer whitespace-nowrap"
                                     >
@@ -89,7 +91,7 @@ const Me = async () => {
                         ))}
                     </ul>
                 )}
-            </div>
+            </section>
         </div>
     )
 }

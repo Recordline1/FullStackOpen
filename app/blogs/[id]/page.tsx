@@ -25,17 +25,17 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
             : false;
 
     return (
-        <div className="flex flex-col gap-4 container mx-auto p-4">
+        <div data-testid="blog-detail" className="flex flex-col gap-4 container mx-auto p-4">
             <h1 className="text-2xl">Blog {blog.id}</h1>
-            <h2 className="text-xl font-semibold">{blog.title}</h2>
-            <p className="text-gray-600">{blog.author}</p>
+            <h2 data-testid="blog-title" className="text-xl font-semibold">{blog.title}</h2>
+            <p data-testid="blog-author" className="text-gray-600">{blog.author}</p>
             <p className="text-blue-500 underline"><a href={blog.url} target="_blank" rel="noopener noreferrer">Read more</a></p>
             <div className="flex gap-2 items-center">
-                <p className="text-sm font-bold text-gray-500">{blog.likes}  likes</p>
+                <p className="text-sm font-bold text-gray-500">{blog.likes} likes</p>
                 <form action={likeBlogAction}>
                     <input type="hidden" name="id" value={blog.id} />
                     <button type="submit" className="text-white bg-amber-500 p-2 rounded-md hover:bg-amber-600 cursor-pointer ">
-                       <span>💕</span> Like Blog
+                       Like Blog
                     </button>
                 </form>
             </div>
@@ -47,7 +47,7 @@ const BlogPage = async ({ params }: { params: Promise<{ id: string }> }) => {
                     ) : (
                         <form action={addBlogToReadingListAction}>
                             <input type="hidden" name="blogId" value={blog.id} />
-                            <button type="submit" className="text-white bg-cyan-600 p-2 rounded-md hover:bg-cyan-700 cursor-pointer">
+                            <button data-testid="add-to-reading-list-button" type="submit" className="text-white bg-cyan-600 p-2 rounded-md hover:bg-cyan-700 cursor-pointer">
                                 Add to reading list
                             </button>
                         </form>

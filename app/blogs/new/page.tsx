@@ -58,7 +58,7 @@ const NewBlog = () => {
                 </div>
                 <div>
                     <label className="flex flex-col gap-2">
-                        Url
+                        URL
                         <input
                             className="border-b border-b-gray-400 p-2 "
                             placeholder="url..."
@@ -67,7 +67,7 @@ const NewBlog = () => {
                         {state.errors?.url && <p className="text-red-500">{state.errors?.url}</p>}
                     </label>
                 </div>
-                <button type="submit" className="bg-amber-500 text-white p-2 rounded-md hover:bg-amber-600">
+                <button data-testid="create-blog-button" type="submit" className="bg-amber-500 text-white p-2 rounded-md hover:bg-amber-600">
                     Create
                 </button>
             </form>
