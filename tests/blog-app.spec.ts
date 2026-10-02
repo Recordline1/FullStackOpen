@@ -207,7 +207,7 @@ test.describe("Blog Application", () => {
       await expect(page.getByTestId("notification")).toBeVisible()
 
       // Blog should appear in the list
-      await expect(page.getByTestId("blogs-list")).toContainText("Test Blog")
+      await expect(page.getByTestId("blogs-list").first()).toContainText("Test Blog")
     })
 
     test("user cannot create blog without being logged in", async ({
@@ -230,7 +230,7 @@ test.describe("Blog Application", () => {
       await page.goto("/blogs")
 
       // Both blogs should be visible
-      const blogsList = page.getByTestId("blogs-list")
+      const blogsList = page.getByTestId("blogs-list").first()
       await expect(blogsList).toContainText("First Blog")
       await expect(blogsList).toContainText("Second Blog")
     })
@@ -267,7 +267,7 @@ test.describe("Blog Application", () => {
 
       await page.goto("/blogs")
 
-      const blogsList = page.getByTestId("blogs-list")
+      const blogsList = page.getByTestId("blogs-list").first()
 
       // All blogs should be visible initially
       await expect(blogsList).toContainText("React Tutorial")
@@ -291,7 +291,7 @@ test.describe("Blog Application", () => {
       await page.goto("/blogs")
 
       // Should show 0 likes initially
-      const blogsList = page.getByTestId("blogs-list")
+      const blogsList = page.getByTestId("blogs-list").first()
       await expect(blogsList).toContainText("0 likes")
     })
   })
